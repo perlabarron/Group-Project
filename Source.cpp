@@ -44,7 +44,7 @@ int main()
 
 	for (int i = 0; i < spot; i++)
 	{
-		for (int j = 0; j < spot; j++)
+		for (int j = 0; j < spot-1; j++)
 		{
 			if (name[j + 1] < name[j])
 			{
