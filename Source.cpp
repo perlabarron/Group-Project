@@ -11,7 +11,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 
-	ifstream file("names.txt");
+	ifstream file("E:\\names.txt");
 
 	if (!file.is_open())
 	{
