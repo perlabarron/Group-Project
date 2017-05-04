@@ -1,69 +1,52 @@
-//Vincent Ly
-#include <iostream>
-#include <string>
 #include <fstream>
+#include <string>
+#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
-int main()
+
+int main(int argc, char* argv[])
 {
-	string text;
-	ifstream ifs("names.txt");
 
-	int totalscore = 0;
-	int spot = 0;
-	//int *eachValue;
+	ifstream file("names.txt");
 
-	string name[5164];
-	
-	string temp;
-
-	while (!ifs.eof())
+	if (!file.is_open())
 	{
-
-		getline(ifs, text);
-		
-		name[spot] = text;
-		
-		//for (int i = 0; i < text.size(); i++)
-		//{
-			
-		//	cout << "It works ";
-		//}
-
-		//cout << name[spot] << endl;
-
-		spot++;
-
-		//cout << text.size() << " ";
-		//cout << "" << text << endl;
-		
+		cout << "Unable to open file";
+		return -1;
 	}
 
-	string nameSort[5164];
+	vector<string> words;
+	string token;
 
-	for (int i = 0; i < spot; i++)
+	while (getline(file, token, ','))
 	{
-		for (int j = 0; j < spot-1; j++)
+		words.push_back(token);
+	}
+
+	sort(words.begin(), words.end());
+
+	int counter = 0;
+	unsigned int grand_total = 0;
+
+	for (auto it = words.begin(); it != words.end(); it++)
+	{
+		counter++;
+		string word((*it).begin() + 1, (*it).end() - 1);
+
+		int sub_total = 0;
+		for (string::iterator it = word.begin(); it != word.end(); it++)
 		{
-			if (name[j + 1] < name[j])
-			{
-				temp = name[j];
-				name[j] = name[j + 1];
-				name[j + 1] = temp;
-			}
+			sub_total += *it - 64;
 		}
+
+		grand_total += sub_total*counter;
 	}
 
-	
-	
-	/*for (int i = 0; i < 5164; i++)
-	{
-		cout << nameSort[i] << endl;
-	}*/
 	system("pause");
-	
-	
 
 	return 0;
 }
